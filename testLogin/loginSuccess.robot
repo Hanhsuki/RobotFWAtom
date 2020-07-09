@@ -18,11 +18,15 @@ LoginSuccess
     Click Button    ${buttonSubmit}
     Element Text Should Be    ${loginfailed}    Login Successful
     Close Browser
-loginFailed
+loginFaileds
     Open Browser  ${url}  ${browser}
     Maximize Browser Window
+    loginFailed
+    Close Browser
+
+*** Keywords ***
+loginFailed
     Input Text    ${email}    @{loginInfo}[0]
     Input Password    ${password}    @{loginInfo}[1]
     Click Button    ${buttonSubmit}
     Log To Console    run with %{username}
-    Close Browser
