@@ -7,12 +7,13 @@ ${email}  //input[@id="email"]
 ${password}  //input[@id="passwd"]
 ${buttonSubmit}  //input[@id="btnsubmit"]
 ${loginfailed}  //div[@id='loginfailed']/h1
-${emailFail}  //
+@{loginInfo}  text  admin
+&{loginAccount}  user=admin  pass=123
 *** Test Cases ***
 LoginSuccess
     Open Browser  ${url}  ${browser}
     Maximize Browser Window
-    Input Text    ${email}    admin
+    Input Text    ${email}    &{loginAccount}[user]
     Input Password    ${password}    123
     Click Button    ${buttonSubmit}
     Element Text Should Be    ${loginfailed}    Login Successful
@@ -20,7 +21,8 @@ LoginSuccess
 loginFailed
     Open Browser  ${url}  ${browser}
     Maximize Browser Window
-    Input Text    ${emailFail}    text
-    Input Password    ${password}    admin
-    Click Button    ${buttonSubmit}   ${loginfailed}    Login Failed
+    Input Text    ${email}    @{loginInfo}[0]
+    Input Password    ${password}    @{loginInfo}[1]
+    Click Button    ${buttonSubmit}
+    Log To Console    run with %{username}
     Close Browser
