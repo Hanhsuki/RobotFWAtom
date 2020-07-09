@@ -1,6 +1,8 @@
 *** Settings ***
 Library    SeleniumLibrary
-# Default Tags  smoke
+
+Suite Setup  Log    Run testSuite
+Suite Teardown  Log    Run teardownTS
 *** Variables ***
 # ${url}  file:///D:/Login/fileHTML/login.html
 ${url}  file:///D:/ROBOTFWATOM/fileHTML/login.html
