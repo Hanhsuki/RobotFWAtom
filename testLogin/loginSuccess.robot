@@ -1,7 +1,11 @@
 *** Settings ***
 Library    SeleniumLibrary
+
+Suite Setup  Log    Run testSuite
+Suite Teardown  Log    Run teardownTS
 *** Variables ***
-${url}  file:///D:/Login/fileHTML/login.html
+# ${url}  file:///D:/Login/fileHTML/login.html
+${url}  file:///D:/ROBOTFWATOM/fileHTML/login.html
 ${browser}  chrome
 ${email}  //input[@id="email"]
 ${password}  //input[@id="passwd"]
@@ -11,6 +15,7 @@ ${loginfailed}  //div[@id='loginfailed']/h1
 &{loginAccount}  user=admin  pass=123
 *** Test Cases ***
 LoginSuccess
+    [Tags]   firstTest
     Open Browser  ${url}  ${browser}
     Maximize Browser Window
     Input Text    ${email}    &{loginAccount}[user]
