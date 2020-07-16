@@ -24,6 +24,7 @@ LoginSuccess
     Element Text Should Be    ${loginfailed}    Login Successful
     Close Browser
 loginFaileds
+    Go To    ${url}
     Open Browser  ${url}  ${browser}
     Maximize Browser Window
     loginFailed
