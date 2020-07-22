@@ -4,7 +4,6 @@ Library    OperatingSystem
 Suite Setup    openLoginPage     ${url}    ${browser}
 Suite Teardown    closeLoginPage
 
-
 *** Variables ***
 ${url}  file:///D:/Login/fileHTML/login.html
 ${browser}  chrome
@@ -18,7 +17,7 @@ ${passwordFail}  admin
 ${passTrue}  123
 *** Test Cases ***
 LoginSuccess
-    [Template]    inputInfoTrue    
+    [Template]    inputInfoTrue
     admin    123
 
 loginFailed

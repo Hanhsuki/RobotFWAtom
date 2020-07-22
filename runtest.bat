@@ -1,1 +1,0 @@
-robot  testLogin/testlogin.robot
