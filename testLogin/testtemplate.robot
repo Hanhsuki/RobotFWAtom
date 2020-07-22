@@ -6,7 +6,7 @@ Suite Teardown    closeLoginPage
 
 
 *** Variables ***
-${url}  file:///D:/Login/fileHTML/login.html
+${url}  file:///D:/RobotFWAtom/fileHTML/login.html
 ${browser}  chrome
 ${email}  //input[@id="email"]
 ${password}  //input[@id="passwd"]
@@ -18,7 +18,7 @@ ${passwordFail}  admin
 ${passTrue}  123
 *** Test Cases ***
 LoginSuccess
-    [Template]    inputInfoTrue    
+    [Template]    inputInfoTrue
     admin    123
 
 loginFailed

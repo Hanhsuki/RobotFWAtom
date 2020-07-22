@@ -1,1 +1,1 @@
-robot  testLogin/testlogin.robot
+robot -d ../reports  testLogin/testlogin.robot
