@@ -5,7 +5,7 @@ Suite Setup    openLoginPage     ${url}    ${browser}
 Suite Teardown    closeLoginPage
 
 *** Variables ***
-${url}  file:///D:/Login/fileHTML/login.html
+${url}  file:///D:/RobotFWAtom/fileHTML/login.html
 ${browser}  chrome
 ${email}  //input[@id="email"]
 ${password}  //input[@id="passwd"]
