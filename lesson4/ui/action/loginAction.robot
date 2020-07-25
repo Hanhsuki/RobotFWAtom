@@ -1,8 +1,8 @@
 
 *** Settings ***
-Library    SeleniumLibrary
-Library    OperatingSystem
-Resource   ../page/loginPage.robot
+Library     SeleniumLibrary
+Library     OperatingSystem
+Resource    ../page/loginPage.robot
 
 *** Keywords ***
 enter info login
