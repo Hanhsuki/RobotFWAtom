@@ -27,7 +27,7 @@ Click Element JS
     Execute Javascript    ${xpath}
 
 Sendkey JS
-    [Arguments]    ${xpathElement}
+    [Arguments]    ${xpathElement}     ${mes_sendkey}
     ${xpath}    Format String    ${mes_sendkey}    ${xpathElement}
     Execute Javascript    ${xpath}
 
@@ -35,3 +35,7 @@ Get value JS
     [Arguments]    ${xpathElement}
     ${xpath}    Format String    ${mes_getvalue}    ${xpathElement}
     Execute Javascript    ${xpath}
+
+Scroll page
+    [Arguments]   
+    Execute Javascript    $(document).scrollTop(500)
