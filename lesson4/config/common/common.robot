@@ -1,21 +1,19 @@
 *** Settings ***
-Library    SeleniumLibrary
-Library    OperatingSystem
-Library    StringFormat
+Library       SeleniumLibrary
+Library       OperatingSystem
+Library       StringFormat
+Resource      envi.robot
 
 *** Variables ***
-${account}   //span[contains(text(),'admin')]
 ${mes_click}      document.evaluate("{0}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()
 ${mes_sendkey}    document.evaluate("{0}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.send_keys('\n')
 ${mes_getvalue}    document.evaluate("{0}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.return()
 
-
 *** Keywords ***
+
 before test
-    [Arguments]    ${url}    ${browser}
-    Append To Environment Variable    PATH    ${EXECDIR}${/}drivers
-    Open Browser    ${url}    ${browser}
-    Maximize Browser Window
+    [Arguments]    ${env}
+    Init Test Environment   ${env}
 
 after test
     Close Browser
@@ -37,5 +35,5 @@ Get value JS
     Execute Javascript    ${xpath}
 
 Scroll page
-    [Arguments]   
+    [Arguments]
     Execute Javascript    $(document).scrollTop(500)
