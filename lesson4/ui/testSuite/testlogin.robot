@@ -3,7 +3,6 @@ Library           SeleniumLibrary
 Library           OperatingSystem
 Library           JSONLibrary
 Library           RequestsLibrary
-Library           String
 Library           StringFormat
 Library           BuiltIn
 Resource          ../page/homePage.robot
@@ -36,13 +35,13 @@ login
     Click Button    ${locator_buttonManager}
     Wait Until Element Is Visible    ${locator_account}
     Element Text Should Be    ${locator_account}    admin
+    
 product
     [Arguments]    ${code}    ${name}   ${cost}    ${price}   ${group}    ${inventory}
     click menu product
     click menu add product
     enter info Product    ${code}    ${name}   ${cost}    ${price}   ${group}    ${inventory}
     verify message create product sussess
-    ${code_api}    Get thong tin ma hang hoa from API   ${code}
-    Log To Console    ${code_api}
-    Should Be Equal    ${code_api}    Thực phẩm chức năng
-    delete product sussess
+    ${CategoryName_api}    Get thong tin ma hang hoa from API   ${code}
+    Log To Console      ${CategoryName_api}
+    Should Be Equal      ${CategoryName_api}    ${group}

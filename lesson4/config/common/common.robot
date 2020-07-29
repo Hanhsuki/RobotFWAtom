@@ -3,6 +3,7 @@ Library       SeleniumLibrary
 Library       OperatingSystem
 Library       StringFormat
 Resource      envi.robot
+Resource      ../../ui/action/listProductAction.robot
 
 *** Variables ***
 ${mes_click}      document.evaluate("{0}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()
@@ -16,6 +17,7 @@ before test
     Init Test Environment   ${env}
 
 after test
+    delete product sussess
     Close Browser
 
 Click Element JS

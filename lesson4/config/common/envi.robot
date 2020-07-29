@@ -1,7 +1,6 @@
 *** Settings ***
 Library           JSONLibrary
 Library           RequestsLibrary
-Library           String
 Library           StringFormat
 Library           BuiltIn
 Library           Collections
@@ -14,9 +13,9 @@ ${API_URL}    https://fnb.kiotviet.vn/api
 Fill env
     [Arguments]    ${env}
     ${DICT_API_URL}    Create Dictionary    live1=https://fnb.kiotviet.vn/api
-    ${DICT_BRANCH_ID}    Create Dictionary    live1='27404'
+    ${DICT_BRANCH_ID}    Create Dictionary    live1=27404
     ${DICT_LATESTBRANCH}    Create Dictionary    live1=LatestBranch_294113_172395
-    ${DICT_URL}    Create Dictionary      live1=https://fnb.kiotviet.vn/chuyendb1/Login
+    ${DICT_URL}    Create Dictionary      live1=https://fnb.kiotviet.vn/chuyendb1
     ${DICT_USER_NAME}    Create Dictionary    live1=admin
     ${DICT_PASSWORD}    Create Dictionary    live1=123
     ${DICT_RETAILER}    Create Dictionary    live1=chuyendb1
@@ -45,7 +44,7 @@ Init Test Environment
     Set Global Variable    \${bearertoken}    ${token_value}
     Set Global Variable    \${resp.cookies}    ${resp.cookies}
     Append To Environment Variable    PATH    ${EXECDIR}${/}drivers
-    Open Browser    ${URL}     chrome
+    Open Browser    ${URL}/Login     chrome
     Maximize Browser Window
     Set Screenshot Directory    ${EXECDIR}${/}out${/}failures
     Set Selenium Speed    0.6s
@@ -59,7 +58,7 @@ Get BearerToken from API
     Should Be Equal As Strings    ${resp.status_code}    200
     Log    ${resp.status_code}
     ${bearertoken}=     Get Value From Json    ${resp.json()}    $..BearerToken
-    ${bearertoken}=    Catenate    Bearer    ${bearertoken}
+    ${bearertoken}=    Catenate    Bearer    ${bearertoken[0]}
     Return From Keyword    ${bearertoken}    ${resp.cookies}
 
 Get data from API
@@ -69,8 +68,10 @@ Get data from API
     \    ${resp1}    ${resp1.status_code}    Get Request and validate status code    ${END_POINT}
     \    Exit For Loop If    '${resp1.status_code}'=='200'
     ${get_raw_data}    Get Value From Json    ${resp1.json()}    ${json_path}
-    Log To Console    ${get_raw_data}
-    Return From Keyword    ${get_raw_data}
+    ${result} =    Evaluate    ${get_raw_data}[0] if ${get_raw_data} else 0
+    ${result} =    Evaluate    $result or 0
+    Return From Keyword    ${result}
+    # Return From Keyword    ${get_raw_data[0]}
 
 Get Request and validate status code
     [Arguments]    ${END_POINT}
