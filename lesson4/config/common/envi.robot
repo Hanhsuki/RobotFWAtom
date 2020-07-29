@@ -37,6 +37,7 @@ Fill env
     Set Global Variable    \${PASSWORD}    ${PASSWORD}
     Set Global Variable    \${RETAILER}    ${RETAILER}
 
+
 Init Test Environment
     [Arguments]    ${env}
     Fill env    ${env}
@@ -68,10 +69,24 @@ Get data from API
     \    ${resp1}    ${resp1.status_code}    Get Request and validate status code    ${END_POINT}
     \    Exit For Loop If    '${resp1.status_code}'=='200'
     ${get_raw_data}    Get Value From Json    ${resp1.json()}    ${json_path}
-    ${result} =    Evaluate    ${get_raw_data}[0] if ${get_raw_data} else 0
-    ${result} =    Evaluate    $result or 0
-    Return From Keyword    ${result}
-    # Return From Keyword    ${get_raw_data[0]}
+    # ${result} =    Evaluate    ${get_raw_data}[0] if ${get_raw_data} else 0
+    # ${result} =    Evaluate    $result or 0
+    # Return From Keyword    ${result}
+    Return From Keyword    ${get_raw_data[0]}
+
+Get data from API 1
+
+    [Arguments]    ${END_POINT}    ${json_path}
+    ${data}    0
+    [Timeout]    1 minute
+    : FOR    ${time}    IN RANGE    5
+    \    ${resp1}    ${resp1.status_code}    Get Request and validate status code    ${END_POINT}
+    \    Exit For Loop If    '${resp1.status_code}'=='200'
+    ${get_raw_data}    Get Value From Json    ${resp1.json()}    ${json_path}
+    Run Keyword If    "${get_raw_data}" !="${data}"
+    ...    ${result} =    Evaluate    ${get_raw_data[0]}
+    ...    ELSE    ${result}=0
+    [Return]    ${result}
 
 Get Request and validate status code
     [Arguments]    ${END_POINT}

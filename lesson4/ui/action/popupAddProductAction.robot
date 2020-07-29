@@ -5,15 +5,15 @@ Resource    ../page/popupAddProduct.robot
 Resource     ../../config/common/common.robot
 *** Keywords ***
 enter info Product
-    [Arguments]    ${code}    ${name}   ${cost}    ${price}   ${group}    ${inventory}
+    [Arguments]    ${code}    ${name}   ${cost}    ${price}   ${group}
     Input Text    ${locator_text_code_product}    ${code}
     Input Text    ${locator_text_name_product}    ${name}
     Click Element    ${locator_icon_dropdown_group_product}
     Wait Until Element Is Visible    ${locator_text_seach_group_product}
     Input Text       ${locator_text_seach_group_product}    ${group}
     Click Element    ${locator_item_group_product}
+    Input Text    ${locator_text_cost_product}    ${cost}
     Input Text    ${locator_text_price_product}    ${price}
-    Input Text    ${locator_text_inventory_product}    ${inventory}
     Scroll page
     Click Element    ${locator_save_product}
 verify message create product sussess
