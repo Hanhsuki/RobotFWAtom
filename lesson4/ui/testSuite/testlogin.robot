@@ -12,8 +12,6 @@ Resource          ../action/listProductAction.robot
 Resource          ../action/popupAddProductAction.robot
 Resource          ../../config/common/common.robot
 Resource          ../../api/getApi/getlistProduct.robot
-Suite Setup       before test    ${env}
-Suite Teardown    after test
 
 *** Variables ***
 ${env}    live1
@@ -21,13 +19,19 @@ ${env}    live1
 
 
 *** Test Cases ***
-Login manager
+LoginManager
+    [Tags]    DemoTagLogin
+    [Setup]    before test login    ${env}
     [Template]   login
     ${USER_NAME}    ${PASSWORD}
+    [Teardown]    after test login
 
 Add product
+    [Tags]    DemoTagAddProduct
+    [Setup]    before test add product    ${env}    ${USER_NAME}    ${PASSWORD}
     [Template]     product
     HH00000001    Hàng hóa test    50000    100000    Thực phẩm chức năng
+    [Teardown]    after test add product
 
 *** Keywords ***
 login

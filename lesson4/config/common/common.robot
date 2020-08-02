@@ -12,11 +12,19 @@ ${mes_getvalue}    document.evaluate("{0}", document, null, XPathResult.FIRST_OR
 
 *** Keywords ***
 
-before test
+before test login
     [Arguments]    ${env}
     Init Test Environment   ${env}
 
-after test
+before test add product
+    [Arguments]    ${env}    ${userName}    ${passwordInfo}
+    Init Test Environment   ${env}
+    login    ${userName}    ${passwordInfo}
+
+after test login
+    Close Browser
+
+after test add product
     delete product sussess
     Close Browser
 
